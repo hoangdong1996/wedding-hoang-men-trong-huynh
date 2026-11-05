@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.angular/
+.tools/
+out-tsc/
+*.zip
+
+/*-preview.png
+*.tar
+.sites-runtime/
+outputs/
