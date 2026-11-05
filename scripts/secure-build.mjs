@@ -1,7 +1,7 @@
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 
-const root = 'dist/wedding/browser';
+const root = 'dist/client';
 const headers = await readFile(join(root, '_headers'), 'utf8');
 const policy = headers.match(/^\s+Content-Security-Policy: (.+)$/m)?.[1];
 if (!policy) throw new Error('Missing production CSP');

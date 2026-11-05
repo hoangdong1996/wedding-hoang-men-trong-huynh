@@ -2,7 +2,8 @@
 import { createServer } from 'node:http';
 import { readFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
-const root = 'dist/wedding/browser';
+const root = 'dist/client';
+const port = Number(process.env.WEDDING_PREVIEW_PORT || 4201);
 const routes = new Map();
 const mime = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.webp':'image/webp','.jpg':'image/jpeg','.jpeg':'image/jpeg','.avif':'image/avif','.woff2':'font/woff2','.woff':'font/woff','.mp3':'audio/mpeg','.ogg':'audio/ogg','.m4a':'audio/mp4'};
 async function collect(dir, prefix='') {
@@ -25,4 +26,4 @@ createServer(async (req,res) => {
     res.writeHead(200,{...headers,'Content-Type':mime[file.slice(file.lastIndexOf('.'))],'Content-Length':data.length});
     res.end(req.method==='HEAD'?undefined:data);
   } catch {res.writeHead(500,headers);res.end('Preview unavailable');}
-}).listen(4201,'127.0.0.1',()=>console.log('Production preview: http://127.0.0.1:4201 (security headers enabled)'));
+}).listen(port,'127.0.0.1',()=>console.log(`Production preview: http://127.0.0.1:${port} (security headers enabled)`));

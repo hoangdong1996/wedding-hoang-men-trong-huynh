@@ -7,10 +7,10 @@ export const wedding = {
   mapsUrl: '', rsvpUrl: '',
   // URL biểu mẫu dành cho người trả lời, không phải URL chỉnh sửa/quản trị.
   wishes: { formUrl: '' },
-  coverImage: 'images/arches.svg', musicUrl: '', publicUrl: '',
+  coverImage: 'images/wedding/a7500273.webp', musicUrl: '', publicUrl: '',
   couple: [
-    { role:'Cô dâu', name:'Minh Anh', image:'images/botanical.svg', description:'Yêu những buổi sáng bình yên, những đóa hoa nhỏ và những chuyến đi cùng người mình thương.' },
-    { role:'Chú rể', name:'Hoàng Nam', image:'images/arches.svg', description:'Tìm thấy niềm vui trong những điều giản dị, và tìm thấy một mái nhà ở người mình yêu.' }
+    { role:'Cô dâu', name:'Minh Anh', image:'images/wedding/a7500412.webp', description:'Yêu những buổi sáng bình yên, những đóa hoa nhỏ và những chuyến đi cùng người mình thương.' },
+    { role:'Chú rể', name:'Hoàng Nam', image:'images/wedding/a7500287.webp', description:'Tìm thấy niềm vui trong những điều giản dị, và tìm thấy một mái nhà ở người mình yêu.' }
   ],
   events: [
     { id:'bride', label:'Nhà gái', title:'Lễ vu quy', date:'2027-03-21T09:00:00+07:00', endDate:'2027-03-21T11:00:00+07:00', venue:'Tư gia nhà gái', address:'Địa điểm minh họa · TP. Hồ Chí Minh', mapsUrl:'', schedule:[{time:'09:00',title:'Đón khách'},{time:'09:30',title:'Lễ gia tiên'},{time:'10:00',title:'Chung vui cùng gia đình'}] },
@@ -25,5 +25,18 @@ export const wedding = {
   ],
   schedule: [ { time: '17:00', title: 'Đón khách', text: 'Gặp gỡ, chụp ảnh và lưu lại những khoảnh khắc.' }, { time: '18:00', title: 'Lễ thành hôn', text: 'Cùng chứng kiến lời hẹn ước của chúng mình.' }, { time: '18:30', title: 'Tiệc chung vui', text: 'Nâng ly cho tình yêu và những điều tốt đẹp.' } ],
   // Thay bằng ảnh WebP của bạn trong public/images; để trống dùng tranh minh họa nội bộ.
-  photos: [] as { src: string; alt: string }[]
+  photos: [
+    { src: 'images/wedding/a7500193-thumb.webp', fullSrc: 'images/wedding/a7500193.webp', alt: 'Một ngày bên nhau' },
+    { src: 'images/wedding/a7500239-thumb.webp', fullSrc: 'images/wedding/a7500239.webp', alt: 'Dịu dàng trong nắng' },
+    { src: 'images/wedding/a7500258-thumb.webp', fullSrc: 'images/wedding/a7500258.webp', alt: 'Một lời hẹn ước' },
+    { src: 'images/wedding/a7500264-thumb.webp', fullSrc: 'images/wedding/a7500264.webp', alt: 'Chung một hành trình' },
+    { src: 'images/wedding/a7500273-thumb.webp', fullSrc: 'images/wedding/a7500273.webp', alt: 'Bình yên bên người thương' },
+    { src: 'images/wedding/a7500324-thumb.webp', fullSrc: 'images/wedding/a7500324.webp', alt: 'Nắm tay qua những ngày đẹp' },
+    { src: 'images/wedding/a7500339-thumb.webp', fullSrc: 'images/wedding/a7500339.webp', alt: 'Cùng nhau dưới nắng' },
+    { src: 'images/wedding/a7500387-thumb.webp', fullSrc: 'images/wedding/a7500387.webp', alt: 'Lưu giữ ngày yêu' },
+    { src: 'images/wedding/a7500476-thumb.webp', fullSrc: 'images/wedding/a7500476.webp', alt: 'Khoảnh khắc của chúng mình' },
+    { src: 'images/wedding/a7500510-thumb.webp', fullSrc: 'images/wedding/a7500510.webp', alt: 'Tựa vào vai nhau' },
+    { src: 'images/wedding/a7500606-thumb.webp', fullSrc: 'images/wedding/a7500606.webp', alt: 'Dạo bước cùng nhau' },
+    { src: 'images/wedding/a7500637-thumb.webp', fullSrc: 'images/wedding/a7500637.webp', alt: 'Niềm vui giản dị' }
+  ] as { src: string; fullSrc?: string; alt: string }[]
 };
