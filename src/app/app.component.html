@@ -25,8 +25,8 @@
     <div class="hero-copy">
       <span class="seal" aria-hidden="true">{{w.initials}}</span>
       <p class="eyebrow">THE BEGINNING OF FOREVER</p>
-      <p class="hero-script">Together is a beautiful<br>place to be.</p>
-      <p class="hero-note">Một lời mời nhỏ cho một ngày thật đặc biệt.<br>Hẹn gặp bạn trong ngày chúng mình về chung một nhà.</p>
+      <p class="hero-script">Together is a beautiful place to be.</p>
+      <p class="hero-note">Một lời mời nhỏ cho một ngày thật đặc biệt. Hẹn gặp bạn trong ngày chúng mình về chung một nhà.</p>
       <a class="button" href="#invitation">Mở thiệp mời <span>↓</span></a>
     </div>
   </section>
@@ -41,7 +41,7 @@
     <div class="invitation-frame reveal-card" revealOnScroll>
       <div class="ornament" aria-hidden="true">❦</div>
       <p class="eyebrow">TRÂN TRỌNG KÍNH MỜI</p>
-      <h2>Ngày vui trọn vẹn hơn<br>khi có bạn.</h2>
+      <h2>Ngày vui trọn vẹn hơn khi có bạn.</h2>
       <p class="prose">{{w.invitation}}</p>
       <div class="family-grid">
         <article>
@@ -155,7 +155,7 @@
     <section id="gifts" class="section gift-section reveal-panel" revealOnScroll>
       <p class="eyebrow">A LITTLE LOVE</p>
       <h2>Gửi yêu thương</h2>
-      <p class="prose">Được đón bạn trong ngày vui là niềm hạnh phúc của chúng mình.<br>Nếu muốn gửi một món quà nhỏ, chúng mình xin trân trọng đón nhận.</p>
+      <p class="prose">Được đón bạn trong ngày vui là niềm hạnh phúc của chúng mình. Nếu muốn gửi một món quà nhỏ, chúng mình xin trân trọng đón nhận.</p>
       @if(w.gifts.length){<button class="button" (click)="giftDialog.showModal()">Mừng cưới cho chúng mình ♡</button>}
       @else{<p class="small">Khu vực mừng cưới sẽ mở khi cặp đôi cập nhật thông tin.</p>}
     </section>
@@ -172,10 +172,10 @@
 </footer>
 
 <nav class="utility-dock" aria-label="Tiện ích thiệp cưới">
+  <a href="#invitation"><span aria-hidden="true">✉</span><small>Thiệp mời</small></a>
   <a href="#event"><span aria-hidden="true">⌖</span><small>Lễ cưới</small></a>
   <a href="#wishes"><span aria-hidden="true">♡</span><small>Lời chúc</small></a>
   @if(w.gifts.length){<button (click)="giftDialog.showModal()"><span aria-hidden="true">♢</span><small>Mừng cưới</small></button>}
-  <button (click)="share()"><span aria-hidden="true">↗</span><small>Chia sẻ</small></button>
   <button (click)="showQr()"><span aria-hidden="true">▦</span><small>Mã QR</small></button>
   @if(w.musicUrl){<button (click)="toggleMusic()" [attr.aria-pressed]="playing()"><span aria-hidden="true">{{playing() ? 'Ⅱ' : '♫'}}</span><small>{{playing() ? 'Tắt nhạc' : 'Nhạc'}}</small></button>}
 </nav>
