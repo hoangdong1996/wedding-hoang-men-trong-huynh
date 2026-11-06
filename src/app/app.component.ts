@@ -20,7 +20,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     events:wedding.events.map(e=>({...e,mapsUrl:httpsUrl(e.mapsUrl)})),
     gifts:wedding.gifts.filter(g=>localAsset(g.qrImage)).map(g=>({...g,qrImage:localAsset(g.qrImage)}))
   }; message=signal('');
-  qrDialog=viewChild.required<ElementRef<HTMLDialogElement>>('qrDialog');
+  qrDialog=viewChild<ElementRef<HTMLDialogElement>>('qrDialog');
   player=viewChild<ElementRef<HTMLAudioElement>>('player');
   playing=signal(false); qrImage=signal(''); qrError=signal('');
   shareUrl=publicShareUrl(wedding.publicUrl, location.href);
@@ -67,7 +67,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     else {audio.pause();this.playing.set(false);}
   }
   async showQr() {
-    this.qrDialog().nativeElement.showModal();
+    const dialog=this.qrDialog()?.nativeElement;
+    if(!dialog) return;
+    dialog.showModal();
     try {const qr=await import('qrcode');this.qrImage.set(await qr.default.toDataURL(this.shareUrl,{width:320,margin:2}));}
     catch {this.qrError.set('Không tạo được QR. Bạn có thể sao chép đường dẫn thiệp.');}
   }

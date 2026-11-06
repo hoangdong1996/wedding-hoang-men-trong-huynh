@@ -6,10 +6,19 @@ export const wedding = {
   venue: 'Tư gia nhà gái', address: 'TDP Phương Lạn, phường Lục Nam, TP. Bắc Ninh',
   mapsUrl: '', rsvpUrl: '',
   // URL biểu mẫu dành cho người trả lời, không phải URL chỉnh sửa/quản trị.
-  wishes: { formUrl: '' },
+  wishes: {
+    formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLScc7Ojq61wDBPqkOMVw4QrM6IWq7d_ZYqu2P4TYzQI5lMAcVA/viewform',
+    nameEntry: 'entry.1185063818',
+    messageEntry: 'entry.1110869128',
+    publicCsvUrl: 'https://docs.google.com/spreadsheets/d/1GWstqPPXaOHQk8shfQOUQsvV-vPMAOzK0qmT13GIAkw/export?format=csv&gid=2037276532'
+  },
+  showInvitationQr: false,
   coverImage: 'images/wedding/a7500273.webp',
   music: [
-    { title: 'Em Đồng Ý (I Do)', src: 'music/em-dong-y-i-do.mp3' }
+    { title: 'Em Đồng Ý (I Do)', src: 'music/em-dong-y-i-do.mp3' },
+    { title: 'Cưới Nhau Đi (Yes I Do) — Bùi Anh Tuấn & Hiền Hồ', src: 'music/cuoi-nhau-di-yes-i-do.mp3' },
+    { title: 'Một Nhà — Da LAB', src: 'music/mot-nha-da-lab.mp3' },
+    { title: 'Xứng Đôi Cưới Thôi — Lê Thiện Hiếu', src: 'music/xung-doi-cuoi-thoi.mp3' }
   ] as { title: string; src: string }[],
   showMusicControl: false,
   publicUrl: 'https://wedding-hoang-men-trong-huynh.hoangdongfit.workers.dev',

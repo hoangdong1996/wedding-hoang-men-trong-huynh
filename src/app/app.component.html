@@ -91,7 +91,7 @@
     <div class="couple-grid">
       @for(person of w.couple;track person.role){
         <article class="person reveal-card" revealOnScroll>
-          <div class="portrait"><img [src]="person.image" [alt]="person.role+' '+person.name" width="520" height="650" loading="lazy"></div>
+          <div class="portrait"><img [src]="person.image" [alt]="person.role+' '+person.name" width="520" height="650" loading="lazy" decoding="async"></div>
           <p class="eyebrow">{{person.role}}</p>
           <h3>{{person.name}}</h3>
           <p>{{person.description}}</p>
@@ -166,7 +166,7 @@
   <p class="footer-script">Thank you</p>
   <div class="signature">{{w.bride}} & {{w.groom}}</div>
   <p>Cảm ơn bạn đã là một phần trong ngày hạnh phúc.</p>
-  <div class="share-actions"><button class="text-link" (click)="share()">Sao chép đường dẫn ↗</button><button class="text-link" (click)="showQr()">QR thiệp cưới ▦</button></div>
+  <div class="share-actions"><button class="text-link" (click)="share()">Sao chép đường dẫn ↗</button>@if(w.showInvitationQr){<button class="text-link" (click)="showQr()">QR thiệp cưới ▦</button>}</div>
   <p role="status">{{message()}}</p>
   <span class="eyebrow">MADE WITH LOVE · {{part('year')}}</span>
 </footer>
@@ -176,11 +176,11 @@
   <a href="#event"><span aria-hidden="true">⌖</span><small>Lễ cưới</small></a>
   <a href="#wishes"><span aria-hidden="true">♡</span><small>Lời chúc</small></a>
   @if(w.gifts.length){<button (click)="giftDialog.showModal()"><span aria-hidden="true">♢</span><small>Mừng cưới</small></button>}
-  <button (click)="showQr()"><span aria-hidden="true">▦</span><small>Mã QR</small></button>
+  @if(w.showInvitationQr){<button (click)="showQr()"><span aria-hidden="true">▦</span><small>Mã QR</small></button>}
   @if(currentMusic && w.showMusicControl){<button class="music-control" (click)="toggleMusic()" [attr.aria-pressed]="playing()" [attr.aria-label]="(playing() ? 'Tạm dừng: ' : 'Phát nhạc: ')+currentMusic.title" [title]="currentMusic.title"><span aria-hidden="true">{{playing() ? 'Ⅱ' : '♫'}}</span><small>{{playing() ? 'Tắt nhạc' : 'Nhạc'}}</small></button>}
 </nav>
 
-@if(currentMusic){<audio #player [src]="currentMusic.src" preload="auto" autoplay loop (play)="playing.set(true)" (pause)="playing.set(false)" (error)="playing.set(false);message.set('Không tải được nhạc nền.')"></audio>}
+@if(currentMusic){<audio #player [src]="currentMusic.src" preload="none" loop (play)="playing.set(true)" (pause)="playing.set(false)" (error)="playing.set(false);message.set('Không tải được nhạc nền.')"></audio>}
 
 <dialog #giftDialog class="gift-dialog" aria-labelledby="gift-title">
   <button class="dialog-close" (click)="giftDialog.close()" aria-label="Đóng mừng cưới">✕</button>
@@ -188,11 +188,13 @@
   <div class="gift-grid">@for(gift of w.gifts;track $index){<article><h3>{{gift.name}}</h3><img [src]="gift.qrImage" [alt]="'QR mừng cưới '+gift.name" width="240" height="240"><p>{{gift.bank}}</p><p class="account">{{gift.account}}</p></article>}</div>
 </dialog>
 
-<dialog #qrDialog class="qr-dialog" aria-labelledby="qr-title">
-  <button class="dialog-close" (click)="qrDialog.close()" aria-label="Đóng QR">✕</button>
-  <h2 id="qr-title">Một lời mời gửi bạn</h2>
-  @if(qrImage()){<img [src]="qrImage()" alt="Mã QR mở thiệp cưới" width="280" height="280">}@else{<p role="status">{{qrError() || 'Đang tạo mã QR…'}}</p>}
-  <p class="qr-url">{{shareUrl}}</p>
-  @if(localUrl){<p class="small">Đây là địa chỉ xem thử trên máy tính. QR dùng cho khách sau khi thiệp được xuất bản online.</p>}
-  <button class="text-link" (click)="share()">Sao chép đường dẫn ↗</button><p role="status">{{message()}}</p>
-</dialog>
+@if(w.showInvitationQr){
+  <dialog #qrDialog class="qr-dialog" aria-labelledby="qr-title">
+    <button class="dialog-close" (click)="qrDialog.close()" aria-label="Đóng QR">✕</button>
+    <h2 id="qr-title">Một lời mời gửi bạn</h2>
+    @if(qrImage()){<img [src]="qrImage()" alt="Mã QR mở thiệp cưới" width="280" height="280">}@else{<p role="status">{{qrError() || 'Đang tạo mã QR…'}}</p>}
+    <p class="qr-url">{{shareUrl}}</p>
+    @if(localUrl){<p class="small">Đây là địa chỉ xem thử trên máy tính. QR dùng cho khách sau khi thiệp được xuất bản online.</p>}
+    <button class="text-link" (click)="share()">Sao chép đường dẫn ↗</button><p role="status">{{message()}}</p>
+  </dialog>
+}

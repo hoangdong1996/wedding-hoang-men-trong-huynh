@@ -27,8 +27,9 @@ export class ScrollRevealDirective implements AfterViewInit, OnDestroy {
         const shouldShow = entry.isIntersecting && entry.intersectionRatio >= 0.12;
         if (shouldShow) {
           this.renderer.addClass(node, 'is-visible');
-        } else {
-          this.renderer.removeClass(node, 'is-visible');
+          this.observer?.unobserve(node);
+          this.observer?.disconnect();
+          this.observer = undefined;
         }
       }
     }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });

@@ -20,6 +20,24 @@ export function googleFormUrl(value: string): string {
   return url.href;
 }
 
+export function googleFormResponseUrl(value: string): string {
+  const viewer = googleFormUrl(value);
+  return viewer.startsWith('https://docs.google.com/forms/')
+    ? viewer.replace(/\/viewform$/, '/formResponse')
+    : '';
+}
+
+export function googleSheetCsvUrl(value: string): string {
+  const safe = httpsUrl(value);
+  if (!safe) return '';
+  const url = new URL(safe);
+  if (url.hostname !== 'docs.google.com' || url.port) return '';
+  if (!/^\/spreadsheets\/d\/[A-Za-z0-9_-]+\/export$/.test(url.pathname)) return '';
+  if (url.searchParams.get('format') !== 'csv' || !/^\d+$/.test(url.searchParams.get('gid') || '')) return '';
+  url.hash = '';
+  return url.href;
+}
+
 export function localAsset(value: string, fallback = ''): string {
   return /^(?:images|music)\/[a-zA-Z0-9_/-]+\.(?:webp|png|jpe?g|svg|avif|mp3|ogg|m4a)$/i.test(value)
     && !value.includes('//') ? value : fallback;

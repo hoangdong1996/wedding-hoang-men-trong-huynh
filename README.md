@@ -64,6 +64,7 @@ Các trường bổ sung trong `wedding.config.ts`:
 Album hỗ trợ hộp xem toàn màn hình, phím trái/phải chuyển ảnh, Escape đóng và khóa cuộn nền. QR liên kết tạo tại trình duyệt, không gửi URL đến dịch vụ QR bên ngoài. Các ảnh hiện có vẫn là tranh minh họa.
 
 ## Lời chúc và bảo mật
-Cấu hình Google Forms tại wishes.formUrl. Chưa có URL thì mục lời chúc hiển thị chưa mở; không lưu hoặc giả lập gửi thành công. Xem SECURITY.md để tạo Forms và bảo vệ dữ liệu phản hồi.
+Cấu hình Google Forms tại `wishes.formUrl`, `wishes.nameEntry` và `wishes.messageEntry`. Website gửi trực tiếp tới endpoint Google Forms, không mở tab mới; khi thiếu cấu hình, form vẫn hiển thị nhưng nút gửi bị khóa. Xem SECURITY.md để lấy entry ID và bảo vệ dữ liệu phản hồi.
+`wishes.publicCsvUrl` trỏ tới CSV export của tab phản hồi Google Sheets. Website hiển thị toàn bộ lời chúc theo thứ tự mới nhất trước, gồm tên, nội dung và Timestamp; Sheet công khai không được chứa dữ liệu riêng tư.
 Build phải dùng npm run build để áp dụng meta CSP dự phòng. npm run preview mở bản production có HTTP security headers trên cổng 4201. F12 chỉ sửa tab của khách, không phải quyền sửa website gốc.
 
