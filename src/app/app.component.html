@@ -61,6 +61,25 @@
         <strong>{{part('day')}}</strong>
         <span>THÁNG {{part('month')}} · {{part('year')}}</span>
       </div>
+      <div class="wedding-calendar" aria-label="Lịch tháng 11 năm 2026, ngày cưới 17 tháng 11">
+        <div class="calendar-heading">
+          <span>LỊCH THÁNG {{part('month')}}</span>
+          <strong>{{part('year')}}</strong>
+        </div>
+        <div class="calendar-grid calendar-weekdays" aria-hidden="true">
+          @for(label of calendarWeekdays;track label){<span>{{label}}</span>}
+        </div>
+        <div class="calendar-grid calendar-days">
+          @for(day of calendarDays;track $index){
+            @if(day){
+              <span [class.wedding-day]="day === weddingDay" [attr.aria-label]="day === weddingDay ? 'Ngày cưới, 17 tháng 11 năm 2026' : null">
+                {{day}}@if(day === weddingDay){<i aria-hidden="true">♥</i>}
+              </span>
+            }@else{<span class="calendar-empty" aria-hidden="true"></span>}
+          }
+        </div>
+        <p><span aria-hidden="true">♥</span> Ngày chúng mình về chung một nhà</p>
+      </div>
       <p class="invitation-time">Vào lúc {{part('hour')}}:{{part('minute')}} · Giờ Việt Nam</p>
       <a class="text-link" href="#event">Xem địa điểm và lịch trình ↓</a>
     </div>
@@ -156,7 +175,6 @@
   <a href="#event"><span aria-hidden="true">⌖</span><small>Lễ cưới</small></a>
   <a href="#wishes"><span aria-hidden="true">♡</span><small>Lời chúc</small></a>
   @if(w.gifts.length){<button (click)="giftDialog.showModal()"><span aria-hidden="true">♢</span><small>Mừng cưới</small></button>}
-  <button (click)="toggleMotion()" [attr.aria-pressed]="motionEnabled()" [attr.aria-label]="motionEnabled() ? 'Tắt hiệu ứng chuyển động' : 'Bật hiệu ứng chuyển động'"><span aria-hidden="true">✦</span><small>{{motionEnabled() ? 'Hiệu ứng' : 'Tĩnh'}}</small></button>
   <button (click)="share()"><span aria-hidden="true">↗</span><small>Chia sẻ</small></button>
   <button (click)="showQr()"><span aria-hidden="true">▦</span><small>Mã QR</small></button>
   @if(w.musicUrl){<button (click)="toggleMusic()" [attr.aria-pressed]="playing()"><span aria-hidden="true">{{playing() ? 'Ⅱ' : '♫'}}</span><small>{{playing() ? 'Tắt nhạc' : 'Nhạc'}}</small></button>}

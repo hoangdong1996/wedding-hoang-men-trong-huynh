@@ -7,13 +7,13 @@ export const wedding = {
   mapsUrl: '', rsvpUrl: '',
   // URL biểu mẫu dành cho người trả lời, không phải URL chỉnh sửa/quản trị.
   wishes: { formUrl: '' },
-  coverImage: 'images/wedding/a7500273.webp', musicUrl: '', publicUrl: 'https://wedding-basic-hoang-demo.jetounce1.chatgpt.site',
+  coverImage: 'images/wedding/a7500273.webp', musicUrl: '', publicUrl: 'https://wedding-hoang-men-trong-huynh.hoangdongfit.workers.dev',
   families: {
-    bride: { label: 'Nhà gái', father: 'Hoàng Văn Tâm', mother: 'Đỗ Thị Hương' },
+    bride: { label: 'Nhà gái', father: 'Hoàng Văn Tám', mother: 'Đỗ Thị Hương' },
     groom: { label: 'Nhà trai', father: 'Nguyễn Văn Hạnh', mother: 'Nguyễn Thị May' }
   },
   couple: [
-    { role:'Cô dâu', name:'Hoàng Mến', image:'images/wedding/a7500412.webp', description:'Con gái ông Hoàng Văn Tâm và bà Đỗ Thị Hương.' },
+    { role:'Cô dâu', name:'Hoàng Mến', image:'images/wedding/a7500412.webp', description:'Con gái ông Hoàng Văn Tám và bà Đỗ Thị Hương.' },
     { role:'Chú rể', name:'Trọng Huynh', image:'images/wedding/a7500287.webp', description:'Con trai ông Nguyễn Văn Hạnh và bà Nguyễn Thị May.' }
   ],
   events: [

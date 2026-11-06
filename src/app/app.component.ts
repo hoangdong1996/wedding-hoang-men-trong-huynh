@@ -17,7 +17,7 @@ export class AppComponent {
   }; message=signal('');
   qrDialog=viewChild.required<ElementRef<HTMLDialogElement>>('qrDialog');
   player=viewChild<ElementRef<HTMLAudioElement>>('player');
-  playing=signal(false); motionEnabled=signal(true); qrImage=signal(''); qrError=signal('');
+  playing=signal(false); qrImage=signal(''); qrError=signal('');
   shareUrl=publicShareUrl(wedding.publicUrl, location.href);
   localUrl=/^(localhost|127\.|\[::1\])/.test(new URL(this.shareUrl).hostname);
   formatDate(date:string) { return new Intl.DateTimeFormat('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'Asia/Ho_Chi_Minh'}).format(new Date(date)); }
@@ -27,18 +27,24 @@ export class AppComponent {
     if(audio.paused) { try {await audio.play();this.playing.set(true);} catch {this.message.set('Không thể phát nhạc. Vui lòng thử lại.');} }
     else {audio.pause();this.playing.set(false);}
   }
-  toggleMotion() {
-    const enabled=!this.motionEnabled();
-    this.motionEnabled.set(enabled);
-    document.documentElement.classList.toggle('motion-off',!enabled);
-  }
   async showQr() {
     this.qrDialog().nativeElement.showModal();
     try {const qr=await import('qrcode');this.qrImage.set(await qr.default.toDataURL(this.shareUrl,{width:320,margin:2}));}
     catch {this.qrError.set('Không tạo được QR. Bạn có thể sao chép đường dẫn thiệp.');}
   }
   dateParts = new Intl.DateTimeFormat('vi-VN', { day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'Asia/Ho_Chi_Minh',hour12:false }).formatToParts(new Date(wedding.date));
+  calendarWeekdays=['T2','T3','T4','T5','T6','T7','CN'];
+  weddingDay=Number(this.part('day'));
+  calendarDays=this.monthCalendar(Number(this.part('year')),Number(this.part('month')));
   part(type:string) { return this.dateParts.find(p=>p.type===type)?.value ?? ''; }
+  monthCalendar(year:number, month:number) {
+    const firstDay=(new Date(Date.UTC(year,month-1,1)).getUTCDay()+6)%7;
+    const total=new Date(Date.UTC(year,month,0)).getUTCDate();
+    const days:(number|null)[]=Array(firstDay).fill(null);
+    for(let day=1;day<=total;day++) days.push(day);
+    while(days.length%7) days.push(null);
+    return days;
+  }
   weekday(date=this.w.date) { return new Intl.DateTimeFormat('vi-VN',{weekday:'long',timeZone:'Asia/Ho_Chi_Minh'}).format(new Date(date)).toLocaleUpperCase('vi-VN'); }
   dayOf(date:string) { return new Intl.DateTimeFormat('vi-VN',{day:'2-digit',timeZone:'Asia/Ho_Chi_Minh'}).format(new Date(date)); }
   calendar(event = {date:this.w.date, endDate:this.w.endDate, venue:this.w.venue, address:this.w.address}) {
