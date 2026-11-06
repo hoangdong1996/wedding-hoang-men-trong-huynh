@@ -31,21 +31,33 @@
     </div>
   </section>
 
-  <section class="countdown-band" aria-label="Đếm ngược ngày cưới">
+  <section class="countdown-band reveal-panel" aria-label="Đếm ngược ngày cưới" revealOnScroll>
     <p class="eyebrow">COUNTING DOWN TO FOREVER</p>
     <h2>Chờ ngày mình chung đôi</h2>
     <app-countdown />
   </section>
 
   <section id="invitation" class="section invitation">
-    <div class="invitation-frame">
+    <div class="invitation-frame reveal-card" revealOnScroll>
       <div class="ornament" aria-hidden="true">❦</div>
       <p class="eyebrow">TRÂN TRỌNG KÍNH MỜI</p>
       <h2>Ngày vui trọn vẹn hơn<br>khi có bạn.</h2>
       <p class="prose">{{w.invitation}}</p>
+      <div class="family-grid">
+        <article>
+          <p class="family-label">{{w.families.bride.label}}</p>
+          <p>Bố: <strong>{{w.families.bride.father}}</strong></p>
+          <p>Mẹ: <strong>{{w.families.bride.mother}}</strong></p>
+        </article>
+        <article>
+          <p class="family-label">{{w.families.groom.label}}</p>
+          <p>Bố: <strong>{{w.families.groom.father}}</strong></p>
+          <p>Mẹ: <strong>{{w.families.groom.mother}}</strong></p>
+        </article>
+      </div>
       <div class="invitation-names"><span>{{w.bride}}</span><em>&</em><span>{{w.groom}}</span></div>
       <div class="date-card">
-        <span>CHỦ NHẬT</span>
+        <span>{{weekday()}}</span>
         <strong>{{part('day')}}</strong>
         <span>THÁNG {{part('month')}} · {{part('year')}}</span>
       </div>
@@ -55,11 +67,11 @@
   </section>
 
   <section id="couple" class="section couple">
-    <p class="eyebrow">TWO HEARTS, ONE HOME</p>
-    <h2>Chúng mình là…</h2>
+    <p class="eyebrow" revealOnScroll>TWO HEARTS, ONE HOME</p>
+    <h2 class="reveal-title" revealOnScroll>Chúng mình là…</h2>
     <div class="couple-grid">
       @for(person of w.couple;track person.role){
-        <article class="person">
+        <article class="person reveal-card" revealOnScroll>
           <div class="portrait"><img [src]="person.image" [alt]="person.role+' '+person.name" width="520" height="650" loading="lazy"></div>
           <p class="eyebrow">{{person.role}}</p>
           <h3>{{person.name}}</h3>
@@ -69,27 +81,29 @@
     </div>
   </section>
 
-  <section id="story" class="section story">
-    <p class="eyebrow">OUR LOVE STORY</p>
-    <h2>Chuyện của chúng mình</h2>
-    <div class="story-grid">
-      @for(item of w.story;track $index){
-        <article><span class="year">{{item.year}}</span><h3>{{item.title}}</h3><p>{{item.text}}</p></article>
-      }
-    </div>
-  </section>
+  @if(w.story.length){
+    <section id="story" class="section story">
+      <p class="eyebrow" revealOnScroll>OUR LOVE STORY</p>
+      <h2 class="reveal-title" revealOnScroll>Chuyện của chúng mình</h2>
+      <div class="story-grid">
+        @for(item of w.story;track $index){
+          <article revealOnScroll><span class="year">{{item.year}}</span><h3>{{item.title}}</h3><p>{{item.text}}</p></article>
+        }
+      </div>
+    </section>
+  }
 
   <app-gallery />
 
   <section id="event" class="section celebrations">
-    <p class="eyebrow">SAVE THE DATE</p>
-    <h2>Hẹn bạn ngày chung đôi</h2>
-    <p class="prose">Một ngày yêu thương, hai gia đình chung niềm vui.</p>
+    <p class="eyebrow" revealOnScroll>SAVE THE DATE</p>
+    <h2 class="reveal-title" revealOnScroll>Hẹn bạn ngày chung đôi</h2>
+    <p class="prose" revealOnScroll>Một ngày yêu thương, hai gia đình chung niềm vui.</p>
     <div class="event-grid">
       @for(event of w.events;track event.id){
-        <article class="event-card">
+        <article class="event-card reveal-card" revealOnScroll>
           <p class="eyebrow">{{event.label}}</p>
-          <div class="event-number">{{part('day')}}</div>
+          <div class="event-number">{{dayOf(event.date)}}</div>
           <h3>{{event.title}}</h3>
           <p class="event-date">{{formatDate(event.date)}} · Giờ Việt Nam</p>
           <h4>{{event.venue}}</h4>
@@ -107,7 +121,7 @@
   </section>
 
   @if(w.rsvpUrl){
-    <section id="rsvp" class="section rsvp">
+    <section id="rsvp" class="section rsvp reveal-panel" revealOnScroll>
       <span class="flower" aria-hidden="true">❦</span>
       <p class="eyebrow">YOU ARE PART OF OUR STORY</p>
       <h2>Bạn sẽ đến chứ?</h2>
@@ -119,7 +133,7 @@
   <app-wishes />
 
   @if(w.gifts.length || w.demo){
-    <section id="gifts" class="section gift-section">
+    <section id="gifts" class="section gift-section reveal-panel" revealOnScroll>
       <p class="eyebrow">A LITTLE LOVE</p>
       <h2>Gửi yêu thương</h2>
       <p class="prose">Được đón bạn trong ngày vui là niềm hạnh phúc của chúng mình.<br>Nếu muốn gửi một món quà nhỏ, chúng mình xin trân trọng đón nhận.</p>
@@ -129,7 +143,7 @@
   }
 </main>
 
-<footer>
+<footer revealOnScroll>
   <p class="footer-script">Thank you</p>
   <div class="signature">{{w.bride}} & {{w.groom}}</div>
   <p>Cảm ơn bạn đã là một phần trong ngày hạnh phúc.</p>
@@ -142,6 +156,7 @@
   <a href="#event"><span aria-hidden="true">⌖</span><small>Lễ cưới</small></a>
   <a href="#wishes"><span aria-hidden="true">♡</span><small>Lời chúc</small></a>
   @if(w.gifts.length){<button (click)="giftDialog.showModal()"><span aria-hidden="true">♢</span><small>Mừng cưới</small></button>}
+  <button (click)="toggleMotion()" [attr.aria-pressed]="motionEnabled()" [attr.aria-label]="motionEnabled() ? 'Tắt hiệu ứng chuyển động' : 'Bật hiệu ứng chuyển động'"><span aria-hidden="true">✦</span><small>{{motionEnabled() ? 'Hiệu ứng' : 'Tĩnh'}}</small></button>
   <button (click)="share()"><span aria-hidden="true">↗</span><small>Chia sẻ</small></button>
   <button (click)="showQr()"><span aria-hidden="true">▦</span><small>Mã QR</small></button>
   @if(w.musicUrl){<button (click)="toggleMusic()" [attr.aria-pressed]="playing()"><span aria-hidden="true">{{playing() ? 'Ⅱ' : '♫'}}</span><small>{{playing() ? 'Tắt nhạc' : 'Nhạc'}}</small></button>}

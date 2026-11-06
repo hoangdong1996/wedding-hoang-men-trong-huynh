@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { wedding } from './wedding.config';
 import { googleFormUrl } from './security';
+import { ScrollRevealDirective } from './scroll-reveal.directive';
 
 @Component({
-  selector: 'app-wishes', standalone: true,
+  selector: 'app-wishes', standalone: true, imports: [ScrollRevealDirective],
   template: `
-    <section id="wishes" class="section wishes-section" aria-labelledby="wishes-title">
+    <section id="wishes" class="section wishes-section reveal-panel" aria-labelledby="wishes-title" revealOnScroll>
       <span class="wish-symbol" aria-hidden="true">♡</span>
       <p class="eyebrow">WORDS TO KEEP FOREVER</p>
       <h2 id="wishes-title">Gửi một lời thương</h2>

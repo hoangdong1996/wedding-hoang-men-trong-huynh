@@ -3,7 +3,7 @@ import { createServer } from 'node:http';
 import { readFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 const root = 'dist/client';
-const port = Number(process.env.WEDDING_PREVIEW_PORT || 4201);
+const port = Number(process.env.WEDDING_PREVIEW_PORT || 4200);
 const routes = new Map();
 const mime = {'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.webp':'image/webp','.jpg':'image/jpeg','.jpeg':'image/jpeg','.avif':'image/avif','.woff2':'font/woff2','.woff':'font/woff','.mp3':'audio/mpeg','.ogg':'audio/ogg','.m4a':'audio/mp4'};
 async function collect(dir, prefix='') {
