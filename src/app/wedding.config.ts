@@ -17,6 +17,8 @@ export const wedding = {
   music: [
     { title: 'Em Đồng Ý (I Do)', src: 'music/em-dong-y-i-do.mp3' },
     { title: 'Cưới Nhau Đi (Yes I Do) — Bùi Anh Tuấn & Hiền Hồ', src: 'music/cuoi-nhau-di-yes-i-do.mp3' },
+    { title: 'Cưới Thôi — Masew, Masiu, B Ray & TAP', src: 'music/cuoi-thoi-masew-masiu-b-ray-tap.mp3' },
+    { title: 'Làm Vợ Anh Nhé — Chi Dân', src: 'music/lam-vo-anh-nhe-chi-dan.mp3' },
     { title: 'Một Nhà — Da LAB', src: 'music/mot-nha-da-lab.mp3' },
     { title: 'Xứng Đôi Cưới Thôi — Lê Thiện Hiếu', src: 'music/xung-doi-cuoi-thoi.mp3' }
   ] as { title: string; src: string }[],

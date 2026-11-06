@@ -1,5 +1,4 @@
-import { isPlatformBrowser } from '@angular/common';
-import { AfterViewInit, Component, computed, ElementRef, inject, OnDestroy, PLATFORM_ID, signal } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { wedding } from './wedding.config';
 import { googleFormResponseUrl, googleSheetCsvUrl } from './security';
 import { ScrollRevealDirective } from './scroll-reveal.directive';
@@ -61,10 +60,7 @@ import { ScrollRevealDirective } from './scroll-reveal.directive';
 
     </section>`
 })
-export class WishesComponent implements AfterViewInit, OnDestroy {
-  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
-  private readonly platformId = inject(PLATFORM_ID);
-  private feedObserver?: IntersectionObserver;
+export class WishesComponent implements OnInit {
   readonly guestName = signal('');
   readonly wishMessage = signal('');
   readonly status = signal('');
@@ -78,22 +74,9 @@ export class WishesComponent implements AfterViewInit, OnDestroy {
   readonly feedState = signal<'loading' | 'ready' | 'error'>(this.feedUrl ? 'loading' : 'ready');
   readonly wishDuration = computed(() => Math.max(24, this.publicWishes().length * 7 + 12));
 
-  ngAfterViewInit() {
-    if (!this.feedUrl) return;
-    if (!isPlatformBrowser(this.platformId) || !('IntersectionObserver' in window)) {
-      void this.loadPublicWishes();
-      return;
-    }
-    this.feedObserver = new IntersectionObserver(entries => {
-      if (!entries.some(entry => entry.isIntersecting)) return;
-      this.feedObserver?.disconnect();
-      this.feedObserver = undefined;
-      void this.loadPublicWishes();
-    }, { rootMargin: '600px 0px' });
-    this.feedObserver.observe(this.host.nativeElement);
+  ngOnInit() {
+    if (this.feedUrl) void this.loadPublicWishes();
   }
-
-  ngOnDestroy() { this.feedObserver?.disconnect(); }
 
   clearStatus() { this.status.set(''); }
 
