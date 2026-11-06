@@ -56,7 +56,7 @@ Thứ tự: ảnh bìa → lời mời → giới thiệu cặp đôi → đếm
 Các trường bổ sung trong `wedding.config.ts`:
 - `coverImage`: ảnh bìa; `couple`: ảnh và giới thiệu từng người.
 - `events`: mỗi sự kiện có ngày bắt đầu/kết thúc, địa điểm, `mapsUrl` và lịch trình riêng; nút lịch xuất đúng sự kiện được chọn.
-- `musicUrl`: đường dẫn MP3 có quyền sử dụng trong `public/music/`. Bỏ trống sẽ ẩn nút nhạc; nhạc chỉ phát khi khách bấm.
+- `music`: playlist các mục `{ title, src }` có quyền sử dụng trong `public/music/`. Khi mở thiệp, một bài hợp lệ được chọn ngẫu nhiên và thử tự phát; nếu mobile chặn autoplay, lần chạm đầu tiên trên thiệp sẽ kích hoạt nhạc. Playlist rỗng sẽ tắt nhạc; `showMusicControl: false` chỉ ẩn nút phát/tạm dừng.
 - `publicUrl`: URL HTTPS chính thức dùng cho QR/chia sẻ; bỏ trống dùng địa chỉ hiện tại. URL localhost không dùng để gửi khách.
 - `gifts`: mỗi mục gồm `name`, `bank`, `account`, `qrImage`. Dùng ảnh QR từ ngân hàng đã đối chiếu đúng người nhận; không tạo số tài khoản mẫu. Bỏ trống sẽ ẩn phần này ở bản chính thức.
 - `rsvpUrl` và `events[].mapsUrl`: bỏ trống sẽ ẩn các nút tương ứng.

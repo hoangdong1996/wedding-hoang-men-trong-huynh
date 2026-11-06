@@ -172,15 +172,15 @@
 </footer>
 
 <nav class="utility-dock" aria-label="Tiện ích thiệp cưới">
-  <a href="#invitation"><span aria-hidden="true">✉</span><small>Thiệp mời</small></a>
+  <a class="dock-invitation" href="#invitation"><span aria-hidden="true">✉</span><small>Thiệp mời</small></a>
   <a href="#event"><span aria-hidden="true">⌖</span><small>Lễ cưới</small></a>
   <a href="#wishes"><span aria-hidden="true">♡</span><small>Lời chúc</small></a>
   @if(w.gifts.length){<button (click)="giftDialog.showModal()"><span aria-hidden="true">♢</span><small>Mừng cưới</small></button>}
   <button (click)="showQr()"><span aria-hidden="true">▦</span><small>Mã QR</small></button>
-  @if(w.musicUrl){<button (click)="toggleMusic()" [attr.aria-pressed]="playing()"><span aria-hidden="true">{{playing() ? 'Ⅱ' : '♫'}}</span><small>{{playing() ? 'Tắt nhạc' : 'Nhạc'}}</small></button>}
+  @if(currentMusic && w.showMusicControl){<button class="music-control" (click)="toggleMusic()" [attr.aria-pressed]="playing()" [attr.aria-label]="(playing() ? 'Tạm dừng: ' : 'Phát nhạc: ')+currentMusic.title" [title]="currentMusic.title"><span aria-hidden="true">{{playing() ? 'Ⅱ' : '♫'}}</span><small>{{playing() ? 'Tắt nhạc' : 'Nhạc'}}</small></button>}
 </nav>
 
-@if(w.musicUrl){<audio #player [src]="w.musicUrl" preload="none" loop (pause)="playing.set(false)" (error)="playing.set(false);message.set('Không tải được nhạc nền.')"></audio>}
+@if(currentMusic){<audio #player [src]="currentMusic.src" preload="auto" autoplay loop (play)="playing.set(true)" (pause)="playing.set(false)" (error)="playing.set(false);message.set('Không tải được nhạc nền.')"></audio>}
 
 <dialog #giftDialog class="gift-dialog" aria-labelledby="gift-title">
   <button class="dialog-close" (click)="giftDialog.close()" aria-label="Đóng mừng cưới">✕</button>

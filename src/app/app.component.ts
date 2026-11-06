@@ -1,4 +1,4 @@
-import { Component, ElementRef, signal, viewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, signal, viewChild } from '@angular/core';
 import { CountdownComponent } from './countdown.component';
 import { GalleryComponent } from './gallery.component';
 import { wedding } from './wedding.config';
@@ -6,11 +6,16 @@ import { WishesComponent } from './wishes.component';
 import { httpsUrl, localAsset, publicShareUrl } from './security';
 import { ScrollRevealDirective } from './scroll-reveal.directive';
 @Component({selector:'app-root',standalone:true,imports:[CountdownComponent,GalleryComponent,WishesComponent,ScrollRevealDirective],templateUrl:'./app.component.html'})
-export class AppComponent {
+export class AppComponent implements AfterViewInit, OnDestroy {
+  readonly musicTracks=wedding.music
+    .map(track=>({...track,src:localAsset(track.src)}))
+    .filter(track=>track.src);
+  readonly currentMusic=this.musicTracks.length
+    ? this.musicTracks[Math.floor(Math.random()*this.musicTracks.length)]
+    : null;
   w={...wedding,
     rsvpUrl:httpsUrl(wedding.rsvpUrl),
     coverImage:localAsset(wedding.coverImage,'images/arches.svg'),
-    musicUrl:localAsset(wedding.musicUrl),
     couple:wedding.couple.map(p=>({...p,image:localAsset(p.image,'images/botanical.svg')})),
     events:wedding.events.map(e=>({...e,mapsUrl:httpsUrl(e.mapsUrl)})),
     gifts:wedding.gifts.filter(g=>localAsset(g.qrImage)).map(g=>({...g,qrImage:localAsset(g.qrImage)}))
@@ -21,10 +26,44 @@ export class AppComponent {
   shareUrl=publicShareUrl(wedding.publicUrl, location.href);
   localUrl=/^(localhost|127\.|\[::1\])/.test(new URL(this.shareUrl).hostname);
   formatDate(date:string) { return new Intl.DateTimeFormat('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'Asia/Ho_Chi_Minh'}).format(new Date(date)); }
+  private readonly unlockMusic=(event:Event)=>{
+    const target=event.target;
+    if(target instanceof Element && target.closest('.music-control')) return;
+    void this.playMusic(false);
+  };
+  ngAfterViewInit() {
+    if(!this.currentMusic) return;
+    void this.playMusic(false).then(started=>{if(!started)this.listenForMusicUnlock();});
+  }
+  ngOnDestroy() {this.stopListeningForMusicUnlock();}
+  private listenForMusicUnlock() {
+    document.addEventListener('pointerdown',this.unlockMusic,{passive:true});
+    document.addEventListener('click',this.unlockMusic);
+    document.addEventListener('keydown',this.unlockMusic);
+  }
+  private stopListeningForMusicUnlock() {
+    document.removeEventListener('pointerdown',this.unlockMusic);
+    document.removeEventListener('click',this.unlockMusic);
+    document.removeEventListener('keydown',this.unlockMusic);
+  }
+  private async playMusic(showError=true) {
+    const audio=this.player()?.nativeElement;
+    if(!audio) return false;
+    try {
+      await audio.play();
+      this.playing.set(true);
+      this.message.set('');
+      this.stopListeningForMusicUnlock();
+      return true;
+    } catch {
+      if(showError)this.message.set('Trình duyệt chưa cho phép phát nhạc. Hãy chạm lại nút Nhạc.');
+      return false;
+    }
+  }
   async toggleMusic() {
     const audio=this.player()?.nativeElement;
     if(!audio) return;
-    if(audio.paused) { try {await audio.play();this.playing.set(true);} catch {this.message.set('Không thể phát nhạc. Vui lòng thử lại.');} }
+    if(audio.paused) await this.playMusic();
     else {audio.pause();this.playing.set(false);}
   }
   async showQr() {

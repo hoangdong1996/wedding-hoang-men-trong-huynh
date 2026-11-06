@@ -7,7 +7,12 @@ export const wedding = {
   mapsUrl: '', rsvpUrl: '',
   // URL biểu mẫu dành cho người trả lời, không phải URL chỉnh sửa/quản trị.
   wishes: { formUrl: '' },
-  coverImage: 'images/wedding/a7500273.webp', musicUrl: '', publicUrl: 'https://wedding-hoang-men-trong-huynh.hoangdongfit.workers.dev',
+  coverImage: 'images/wedding/a7500273.webp',
+  music: [
+    { title: 'Em Đồng Ý (I Do)', src: 'music/em-dong-y-i-do.mp3' }
+  ] as { title: string; src: string }[],
+  showMusicControl: false,
+  publicUrl: 'https://wedding-hoang-men-trong-huynh.hoangdongfit.workers.dev',
   families: {
     bride: { label: 'Nhà gái', father: 'Hoàng Văn Tám', mother: 'Đỗ Thị Lương' },
     groom: { label: 'Nhà trai', father: 'Nguyễn Văn Hạnh', mother: 'Nguyễn Thị May' }
