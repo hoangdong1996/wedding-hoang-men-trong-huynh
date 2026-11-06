@@ -1,5 +1,6 @@
 /* Korean editorial wedding theme, inspired by the supplied reference. */
 :root{--paper:#f8f3ec;--ink:#302623;--wine:#7a2935;--wine-dark:#5d1f28;--rose:#ead8d4;--muted:#7c6f69;--line:#d9c9c2;--white:#fffdf9;--olive:var(--wine)}
+html,body{overflow-x:clip}
 body{background:var(--paper);color:var(--ink)}
 h1,h2,h3,.signature,.hero-script,.invitation-names,.footer-script{font-family:'Noto Serif',Georgia,serif}
 .demo{background:var(--wine);color:#fff;letter-spacing:2px;position:relative;z-index:20}
