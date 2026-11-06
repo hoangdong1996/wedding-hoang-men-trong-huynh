@@ -9,12 +9,12 @@ export const wedding = {
   wishes: { formUrl: '' },
   coverImage: 'images/wedding/a7500273.webp', musicUrl: '', publicUrl: 'https://wedding-hoang-men-trong-huynh.hoangdongfit.workers.dev',
   families: {
-    bride: { label: 'Nhà gái', father: 'Hoàng Văn Tám', mother: 'Đỗ Thị Hương' },
+    bride: { label: 'Nhà gái', father: 'Hoàng Văn Tám', mother: 'Đỗ Thị Lương' },
     groom: { label: 'Nhà trai', father: 'Nguyễn Văn Hạnh', mother: 'Nguyễn Thị May' }
   },
   couple: [
-    { role:'Cô dâu', name:'Hoàng Mến', image:'images/wedding/a7500412.webp', description:'Con gái ông Hoàng Văn Tám và bà Đỗ Thị Hương.' },
-    { role:'Chú rể', name:'Trọng Huynh', image:'images/wedding/a7500287.webp', description:'Con trai ông Nguyễn Văn Hạnh và bà Nguyễn Thị May.' }
+    { role:'Cô dâu', name:'Hoàng Mến', image:'images/wedding/a7500412.webp', description:'Con gái ông Hoàng Văn Tám và bà\u00a0Đỗ\u00a0Thị\u00a0Lương.' },
+    { role:'Chú rể', name:'Trọng Huynh', image:'images/wedding/a7500287.webp', description:'Con trai ông Nguyễn Văn Hạnh và bà\u00a0Nguyễn\u00a0Thị\u00a0May.' }
   ],
   events: [
     { id:'dinner', label:'Tiệc thân mật', title:'Bữa cơm chung vui', date:'2026-11-16T15:00:00+07:00', endDate:'2026-11-16T18:00:00+07:00', venue:'Tư gia nhà gái', address:'TDP Phương Lạn, phường Lục Nam, TP. Bắc Ninh', mapsUrl:'', schedule:[{time:'15:00',title:'Bữa cơm thân mật'}] },

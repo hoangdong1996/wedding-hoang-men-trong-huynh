@@ -9,3 +9,5 @@ out-tsc/
 *.tar
 .sites-runtime/
 outputs/
+
+/projectMemory
